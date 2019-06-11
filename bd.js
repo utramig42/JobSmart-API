@@ -1,5 +1,5 @@
 const mysql = require("mysql");
-const dataConnection = require('./dataConnection.json');
+const dataConnection = require('./dataConnect.json');
 
 let connection = mysql.createConnection(dataConnection);
 
