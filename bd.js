@@ -1,11 +1,7 @@
 const mysql = require("mysql");
+const dataConnection = require('./dataConnection.json');
 
-let connection = mysql.createConnection({
-  host: "10.14.93.20",
-  user: "root",
-  password: "123456",
-  database: "jobsmart"
-});
+let connection = mysql.createConnection(dataConnection);
 
 connection.connect(err => {
   if (err) throw err;
