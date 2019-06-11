@@ -1,6 +1,6 @@
 {
-    "host": "10.14.93.20",
+    "host": "localhost",
     "user": "root",
-    "password": "123456",
+    "password": "",
     "database": "jobsmart"
 }

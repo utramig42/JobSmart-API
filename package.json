@@ -19,7 +19,6 @@
   "homepage": "https://github.com/arthurabreu00/api-jobsmart#readme",
   "dependencies": {
     "express": "^4.17.1",
-    "ip": "^1.1.5",
     "mysql": "^2.17.1"
   }
 }

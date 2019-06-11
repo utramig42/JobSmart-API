@@ -2,7 +2,8 @@ const express = require("express");
 const conn = require("./bd");
 const app = express();
 
-app.all("/*", function(req, res, next) {
+// Evitando problemas de CORS.
+app.all("/*", function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "X-Requested-With");
   next();
@@ -10,7 +11,7 @@ app.all("/*", function(req, res, next) {
 
 app.get("/", (req, res) => {
   res.set({ "Content-Type": "application/JSON" });
-  conn.query("SELECT * FROM produto", (err, rows, filds) => {
+  conn.query("SELECT p.*,e.vlr_venda_est FROM produto p INNER JOIN estoque e ON e.id_prod = p.id_prod;", (err, rows, filds) => {
     res.json(rows);
   });
 });
@@ -18,7 +19,7 @@ app.get("/", (req, res) => {
 app.get("/:id", (req, res) => {
   res.set({ "Content-Type": "application/JSON" });
   conn.query(
-    `SELECT * FROM produto WHERE id_prod = ${req.params.id} `,
+    `SELECT p.*,e.vlr_venda_est FROM produto p INNER JOIN estoque e ON e.id_prod = p.id_prod; WHERE p.id_prod = ${req.params.id} OR LIKE '%${req.params.id}%' `,
     (err, rows, filds) => {
       res.json(rows);
     }
@@ -26,7 +27,7 @@ app.get("/:id", (req, res) => {
 });
 
 // Initialize the app.
-var server = app.listen(process.env.PORT || 8080, function() {
+var server = app.listen(process.env.PORT || 8080, function () {
   var port = server.address().port;
   console.log("API rodando na porta", port);
 });
